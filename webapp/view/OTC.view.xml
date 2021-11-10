@@ -1,0 +1,226 @@
+<mvc:View
+    controllerName="com.cg.zotc.zotc.controller.OTC"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+     xmlns:m="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    xmlns:ui="sap.ui.unified"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+                <HBox >
+                    <items>
+                        <VBox class="sapUiMediumMarginEnd">
+                            <items>
+                                <Label text="{i18n>month}"/>
+				    
+                                    <DatePicker displayFormat="MM/yyyy"></DatePicker>
+                            </items>
+                        </VBox>
+                        <VBox class="sapUiMediumMarginEnd">
+                            <items>
+                                <Label text="{i18n>plant}"/>
+                                <ComboBox>
+				                <core:Item key="1101" text="1101" />
+                                <core:Item key="1102" text="1102" />
+                                <core:Item key="1103" text="1103" />
+			                    </ComboBox>
+                            </items>
+                        </VBox>
+                        <VBox class="sapUiMediumMarginEnd">
+                            <items>
+                                 <Label text="{i18n>salesOrg}"/>
+                                 <ComboBox>
+				                    <core:Item key="Sales Organization 1" text="Sales Organization 1" />
+                                    <core:Item key="Sales Organization 2" text="Sales Organization 2" />
+                                    <core:Item key="Sales Organization 3" text="Sales Organization 3" />
+			                    </ComboBox>
+                            </items>
+                        </VBox>
+                        <VBox class="sapUiMediumMarginEnd">
+                            <items>
+                             <Label/>
+                                <Button text="{i18n>execute}" type="Accept" icon="sap-icon://feeder-arrow"/> 
+                            </items>
+                        </VBox>
+                    </items>
+                </HBox>
+                <f:SimpleForm id="SimpleFormotc"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Selection Screen"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false" >
+			<f:content>
+            <core:Title text="Orders"/>
+				<Label text="Total order lines due this month"/>
+                <Text text="50"/>
+                <Label text="Lines Shipped Completed By Required Date"/>
+                <Text text="27"/>
+                <Label text="{i18n>lineready}"/>
+                <Text text="19/38.00 %"/>
+                 <core:Title text="Cylinders"/>
+				<Label text="Total Cylinders Due To Ship"/>
+                <Text text="306"/>
+                <Label text="Cylinders Shipped By Required Date"/>
+                <Text text="134"/>
+                <Label text="{i18n>cylsready}"/>
+                <Text text="73/23.86 %"/>   
+                </f:content>
+                </f:SimpleForm>
+                <t:Table
+				id="idtablescreen"
+                rows="{/orderData}"
+				selectionMode="Single"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<t:extension>
+					<OverflowToolbar>
+						<Title id="title" text="{i18n>onetimeshipreport}"/>
+						<m:ToolbarSpacer/>
+                         <m:SearchField
+                        id="idSearch"
+							placeholder="{i18n>Filter}"
+                            tooltip="{i18n>Filter}"
+							search="filterGlobally"
+							width="15rem"/>
+						<Input id="idfixcol"  tooltip="{i18n>entercolumncount}" placeholder="{i18n>entercolumncount}" width="20%"/>
+						<Button text="{i18n>apply}" type="Accept" icon="sap-icon://accept" press="pressApply"/>
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column width="11rem">
+						<Label text="{i18n>orderno}" />
+						<t:template>
+						<Text text="{orderno}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label text="{i18n>orderlineno}" />
+						<t:template>
+					<Text text="{orderline}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem" hAlign="End">
+						<Label text="{i18n>customerno}" />
+						<t:template>
+						<Text text="{customerno}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>customer}" />
+						<t:template>
+					<Text text="{customer}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>ordervalue}" />
+						<t:template>
+					<Text text="{ordervalue}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>materialno}" />
+						<t:template>
+					<Text text="{materialNum}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>materialgroup}" />
+						<t:template>
+					<Text text="{materialgroup}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="{i18n>schedulelineno}" />
+						<t:template>
+						<Text text="{schedulelineno}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="7rem">
+						<Label text="{i18n>schedulelineorderitem}" />
+						<t:template>
+					<Text text="{schedulelineorder}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>schedulelineconfirmqty}" />
+						<t:template>
+						<Text text="{scheduleconfirm}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="12rem">
+						<Label text="{i18n>schlineconfirdate}" />
+						<t:template>
+					<Text text="{schedulecofirmdate}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem" hAlign="Center">
+						<Label text="{i18n>plannedpgidate}" />
+						<t:template>
+						<Text text="{plannedpgidate}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem" hAlign="Center">
+						<Label text="{i18n>actualpgidate}" />
+						<t:template>
+					<Text text="{actualpgidate}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem" hAlign="Center">
+						<Label text="{i18n>shippedbyduedate}" />
+						<t:template>
+					<Text text="{shippedduedate}" wrapping="false" />
+						</t:template>
+					</t:Column>
+						<t:Column width="11rem" hAlign="Center">
+						<Label text="{i18n>shippedcount}" />
+						<t:template>
+				<Text text="{shippedcount}" wrapping="false" />
+						</t:template>
+					</t:Column>
+						<t:Column width="11rem" hAlign="Center">
+						<Label text="{i18n>readycount}" />
+						<t:template>
+					<Text text="{readycount}" wrapping="false" />
+						</t:template>
+					</t:Column>
+						<t:Column width="11rem" hAlign="Center">
+						<Label text="{i18n>plant}" />
+						<t:template>
+				<Text text="{plant}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+                    </content>
+                    <footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="Print" tooltip="Print Records" icon="sap-icon://print" id="idPrint" type="Emphasized" press="onPressPrint"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
